@@ -834,6 +834,27 @@ export default class PokemonSpecies extends PokemonSpeciesForm implements Locali
       ? this.forms[formIndex || 0].getFormSpriteKey()
       : "";
   }
+
+  getFormText(formIndex?: integer) {
+    const speciesName = Species[this.speciesId].toLowerCase().split("_");
+    for (let i = 1; i < speciesName?.length; i++) {
+      speciesName[i] = speciesName[i].charAt(0).toUpperCase() + speciesName[i].substring(1);
+    }
+
+    const formText = this.forms?.[formIndex]?.formKey.split("-");
+    for (let i = 0; i < formText?.length; i++) {
+      formText[i] = formText[i].charAt(0).toUpperCase() + formText[i].substring(1);
+    }
+
+    let formName: string | string[];
+    if (this.speciesId === Species.ARCEUS) {
+      formName = i18next.t(`pokemonInfo:Type.${formText?.join("").toUpperCase()}`);
+    } else {
+      formName = formText?.join("") ? i18next.t(`pokemonForm:${speciesName.join("")}${formText.join("")}`) : "";
+    }
+
+    return formName;
+  }
 }
 
 export class PokemonForm extends PokemonSpeciesForm {

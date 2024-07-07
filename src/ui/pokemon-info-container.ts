@@ -239,7 +239,8 @@ export default class PokemonInfoContainer extends Phaser.GameObjects.Container {
           this.pokemonFormLabelText.setShadowColor(getTextColor(TextStyle.WINDOW, true, this.scene.uiTheme));
         }
 
-        const formName = pokemon.species.forms?.[pokemon.formIndex]?.formName;
+        const formName = pokemon.species.getFormText(pokemon.formIndex);
+
         this.pokemonFormText.setText(formName.length > this.numCharsBeforeCutoff ? formName.substring(0, this.numCharsBeforeCutoff - 3) + "..." : formName);
         if (formName.length > this.numCharsBeforeCutoff) {
           this.pokemonFormText.setInteractive(new Phaser.Geom.Rectangle(0, 0, this.pokemonFormText.width, this.pokemonFormText.height), Phaser.Geom.Rectangle.Contains);
