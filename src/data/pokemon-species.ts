@@ -853,7 +853,7 @@ export default class PokemonSpecies extends PokemonSpeciesForm implements Locali
       formName = formText?.join("") ? i18next.t(`pokemonForm:${speciesName.join("")}${formText.join("")}`) : "";
     }
 
-    return formName;
+    return formName || this.forms?.[formIndex]?.formName ;
   }
 }
 
